@@ -6,11 +6,13 @@
 <title>Vote Tonia Miller | District 6</title>
 
 <style>
+/* ================= BASE ================= */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f6f8fb;
     color: #222;
+    line-height: 1.6;
     scroll-behavior: smooth;
 }
 
@@ -19,89 +21,169 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(11, 61, 145, 0.95);
+    background: rgba(11, 61, 145, 0.9);
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 16px;
-    z-index: 1000;
+    padding: 12px 20px;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
 
-.logo {
+.navbar.scrolled {
+    padding: 8px 20px;
+    background: rgba(11, 61, 145, 0.98);
+}
+
+.navbar .logo {
     font-weight: bold;
 }
 
-/* NAV LINKS */
-.nav-links {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.nav-links a {
+.navbar a {
     color: white;
     text-decoration: none;
+    margin-left: 15px;
     font-weight: bold;
-    white-space: nowrap;
+    transition: 0.3s;
 }
 
-.cta {
+.navbar a:hover {
+    opacity: 0.7;
+}
+
+.navbar .cta {
     background: #2e8b57;
-    padding: 6px 10px;
+    padding: 8px 14px;
     border-radius: 6px;
-}
-
-/* ================= HAMBURGER ================= */
-.menu-toggle {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* MOBILE MENU */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        position: absolute;
-        top: 50px;
-        left: 0;
-        width: 100%;
-        background: #0b3d91;
-        flex-direction: column;
-        display: none;
-        padding: 10px 0;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        padding: 10px;
-    }
 }
 
 /* ================= HERO ================= */
 .hero {
-    margin-top: 60px;
-    padding: 140px 20px;
+    margin-top: 55px;
+    padding: 140px 20px 90px;
     text-align: center;
     color: white;
     background: linear-gradient(120deg, #0b3d91, #2e8b57);
+    position: relative;
+    overflow: hidden;
 }
 
-/* ================= SECTION ================= */
+/* animated glow */
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
+    animation: floatGlow 12s infinite linear;
+    top: -100%;
+    left: -100%;
+}
+
+@keyframes floatGlow {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(80px,-60px); }
+    100% { transform: translate(0,0); }
+}
+
+/* hero animations */
+.hero h1,
+.hero p,
+.hero a {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s forwards;
+}
+
+.hero h1 { animation-delay: 0.2s; }
+.hero p:nth-of-type(1) { animation-delay: 0.4s; }
+.hero p:nth-of-type(2) { animation-delay: 0.6s; }
+.hero a { animation-delay: 0.8s; }
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero .cta-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 24px;
+    background: white;
+    color: #0b3d91;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.hero .cta-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ================= SECTIONS ================= */
 .section {
     max-width: 1000px;
     margin: auto;
-    padding: 60px 20px;
+    padding: 70px 20px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= STORY ================= */
+.story {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.story img {
+    width: 280px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.story-text {
+    flex: 1;
+}
+
+.highlight {
+    background: #2e8b57;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 /* ================= PRIORITIES ================= */
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+}
+
+.subtitle {
+    text-align: center;
+    max-width: 700px;
+    margin: 10px auto 40px;
+    color: #555;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -110,31 +192,63 @@ body {
 
 .card {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    transition: 0.3s;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.18);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #0b3d91;
 }
 
 .icon {
-    font-size: 26px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
-/* ================= FLOATING CTA ================= */
-.floating-cta {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+.featured {
+    border-left: 6px solid #0b3d91;
+    background: linear-gradient(135deg, #ffffff, #eef5ff);
+}
+
+/* ================= IMPACT ================= */
+.impact {
+    background: linear-gradient(90deg, #0b3d91, #2e8b57);
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+    transition: 0.5s ease;
+}
+
+.impact:hover {
+    transform: scale(1.02);
+}
+
+/* ================= CTA ================= */
+.final-cta {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.final-cta a {
+    display: inline-block;
+    padding: 14px 26px;
     background: #2e8b57;
     color: white;
-    padding: 14px 18px;
-    border-radius: 50px;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.final-cta a:hover {
+    transform: scale(1.05);
 }
 
 /* ================= FOOTER ================= */
@@ -143,6 +257,13 @@ footer {
     color: white;
     text-align: center;
     padding: 20px;
+    font-size: 0.9rem;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .story { flex-direction: column; text-align: center; }
 }
 </style>
 </head>
@@ -152,10 +273,7 @@ footer {
 <!-- NAVBAR -->
 <div class="navbar">
     <div class="logo">Tonia Miller</div>
-
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-    <div class="nav-links" id="navLinks">
+    <div>
         <a href="#priorities">Priorities</a>
         <a href="#story">About</a>
         <a class="cta" href="#contact">Get Involved</a>
@@ -167,49 +285,85 @@ footer {
     <h1>Vote Tonia Miller</h1>
     <p>District 6 – Bessemer City Council</p>
     <p><em>Real Leadership. Real Community Progress.</em></p>
+    <a class="cta-btn" href="#contact">Get Involved</a>
 </section>
 
 <!-- STORY -->
 <section class="section" id="story">
-    <h2>About</h2>
-    <p>I live here. I serve here. I believe in this community.</p>
-</section>
+    <div class="story">
+        <img src="assets/tonia.jpg" alt="Tonia Miller">
 
-<!-- PRIORITIES -->
-<section class="section" id="priorities">
-    <h2>Priorities</h2>
+        <div class="story-text">
+            <h2>Rooted in the Community</h2>
+            <p>
+                I live here. I serve here. I believe in District 6.
+                My mission is simple: stronger neighborhoods, accountable leadership,
+                and real opportunity for every resident.
+            </p>
 
-    <div class="grid">
-        <div class="card">
-            <div class="icon">🏛️</div>
-            <h3>Leadership</h3>
-        </div>
-
-        <div class="card">
-            <div class="icon">🚧</div>
-            <h3>Services</h3>
-        </div>
-
-        <div class="card">
-            <div class="icon">💼</div>
-            <h3>Economy</h3>
-        </div>
-
-        <div class="card">
-            <div class="icon">🧓🏾</div>
-            <h3>Senior Support</h3>
+            <div class="highlight">
+                Progress begins with leadership that listens, shows up, and delivers.
+            </div>
         </div>
     </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section" id="contact">
-    <h2>Contact</h2>
-    <p>Email: info@example.com</p>
+<!-- PRIORITIES -->
+<section class="section" id="priorities">
+
+    <h2 class="section-title">Priorities for District 6</h2>
+
+    <p class="subtitle">
+        A focused plan built on real results, not promises.
+    </p>
+
+    <div class="grid">
+
+        <div class="card featured">
+            <div class="icon">🏛️</div>
+            <h3>Transparent Leadership</h3>
+            <p>Clear communication and accountability in every decision.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🚧</div>
+            <h3>Reliable Services</h3>
+            <p>Consistent city services residents can depend on.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💼</div>
+            <h3>Economic Growth</h3>
+            <p>Jobs, investment, and opportunity for the community.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">👵</div>
+            <h3>Senior Support</h3>
+            <p>Protecting and prioritizing seniors in our community.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏘️</div>
+            <h3>Community Strength</h3>
+            <p>Safer, stronger neighborhoods through action.</p>
+        </div>
+
+    </div>
 </section>
 
-<!-- FLOATING CTA -->
-<a href="#contact" class="floating-cta">Get Involved</a>
+<!-- IMPACT -->
+<section class="impact">
+    <h2>Vote August 25th, 2026</h2>
+    <p>Your voice shapes the future of District 6.</p>
+</section>
+
+<!-- CTA -->
+<section class="final-cta" id="contact">
+    <h2>Get Involved Today</h2>
+    <p>Join the movement for real progress.</p>
+    <a href="mailto:info@example.com">Contact Campaign</a>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -218,9 +372,25 @@ footer {
 
 <!-- SCRIPT -->
 <script>
-function toggleMenu() {
-    document.getElementById("navLinks").classList.toggle("active");
-}
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+    });
+}, { threshold: 0.15 });
+
+sections.forEach(section => observer.observe(section));
+
+window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.navbar');
+    if (window.scrollY > 20) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
 </script>
 
 </body>
