@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,6 @@
 <title>Vote Tonia Miller | District 6</title>
 
 <style>
-
 /* ================= BASE ================= */
 body {
     margin: 0;
@@ -17,7 +17,7 @@ body {
     scroll-behavior: smooth;
 }
 
-/* ================= NAVBAR (FIXED) ================= */
+/* ================= NAVBAR ================= */
 .navbar {
     position: fixed;
     top: 0;
@@ -31,10 +31,8 @@ body {
     z-index: 999;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    flex-wrap: nowrap; /* IMPORTANT FIX */
 }
 
-/* optional scroll effect */
 .navbar.scrolled {
     padding: 8px 20px;
     background: rgba(11, 61, 145, 0.98);
@@ -44,7 +42,12 @@ body {
     font-weight: bold;
 }
 
-/* FIXED NAV GROUPING */
+/* FIX NAV CONTAINER OVERFLOW */
+.navbar {
+    flex-wrap: nowrap;
+}
+
+/* GROUP LINKS PROPERLY */
 .nav-links {
     display: flex;
     align-items: center;
@@ -52,19 +55,13 @@ body {
     flex-shrink: 0;
 }
 
+/* PREVENT TEXT PUSHING OUT */
 .navbar a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+    margin-left: 0;
     white-space: nowrap;
-    margin-left: 0; /* IMPORTANT FIX */
 }
 
-.navbar a:hover {
-    opacity: 0.7;
-}
-
+/* CTA BUTTON SAFETY */
 .navbar .cta {
     background: #2e8b57;
     padding: 8px 14px;
@@ -87,7 +84,6 @@ body {
         font-size: 0.8rem;
     }
 }
-
 /* ================= HERO ================= */
 .hero {
     margin-top: 55px;
@@ -303,7 +299,6 @@ footer {
 <div class="navbar">
     <div class="logo">Tonia Miller</div>
 
-    <!-- FIXED GROUP -->
     <div class="nav-links">
         <a href="#priorities">Priorities</a>
         <a href="#story">About</a>
@@ -328,7 +323,7 @@ footer {
             <h2>Rooted in the Community</h2>
             <p>
                 I live here. I serve here. I believe in District 6.
-                My mission is simple: stronger neighborhoods, accountability,
+                My mission is simple: stronger neighborhoods, accountable leadership,
                 and real opportunity for every resident.
             </p>
 
@@ -341,6 +336,7 @@ footer {
 
 <!-- PRIORITIES -->
 <section class="section" id="priorities">
+
     <h2 class="section-title">Priorities for District 6</h2>
 
     <p class="subtitle">
@@ -348,30 +344,37 @@ footer {
     </p>
 
     <div class="grid">
+
         <div class="card featured">
             <div class="icon">🏛️</div>
             <h3>Transparent Leadership</h3>
+            <p>Clear communication and accountability in every decision.</p>
         </div>
 
         <div class="card">
             <div class="icon">🚧</div>
             <h3>Reliable Services</h3>
+            <p>Consistent city services residents can depend on.</p>
         </div>
 
         <div class="card">
             <div class="icon">💼</div>
             <h3>Economic Growth</h3>
+            <p>Jobs, investment, and opportunity for the community.</p>
         </div>
 
         <div class="card">
-            <div class="icon">🧓🏾</div>
+            <div class="icon">👵🏾</div>
             <h3>Senior Support</h3>
+            <p>Protecting and prioritizing seniors in our community.</p>
         </div>
 
         <div class="card">
             <div class="icon">🏘️</div>
             <h3>Community Strength</h3>
+            <p>Safer, stronger neighborhoods through action.</p>
         </div>
+
     </div>
 </section>
 
@@ -396,7 +399,6 @@ footer {
 <!-- SCRIPT -->
 <script>
 const sections = document.querySelectorAll('.section');
-
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
