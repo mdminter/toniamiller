@@ -24,13 +24,19 @@ body {
     width: 100%;
     background: rgba(11, 61, 145, 0.9);
     color: white;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 12px 20px;
     z-index: 999;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+
+    flex-wrap: nowrap;
+    box-sizing: border-box; /* 🔥 CRITICAL FIX */
+    overflow: hidden;       /* 🔥 prevents overflow */
 }
 
 .navbar.scrolled {
@@ -40,36 +46,40 @@ body {
 
 .navbar .logo {
     font-weight: bold;
+    flex-shrink: 0;
 }
 
-/* FIX NAV CONTAINER OVERFLOW */
-.navbar {
-    flex-wrap: nowrap;
-}
-
-/* GROUP LINKS PROPERLY */
+/* LINKS WRAPPER */
 .nav-links {
     display: flex;
     align-items: center;
     gap: 12px;
-    flex-shrink: 0;
+
+    flex-shrink: 1;
+    min-width: 0; /* 🔥 CRITICAL for flex overflow fixes */
 }
 
-/* PREVENT TEXT PUSHING OUT */
+/* LINKS */
 .navbar a {
-    margin-left: 0;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+
     white-space: nowrap;
+    margin-left: 0;
 }
 
-/* CTA BUTTON SAFETY */
+/* CTA BUTTON */
 .navbar .cta {
     background: #2e8b57;
     padding: 8px 14px;
     border-radius: 6px;
+
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
-/* MOBILE SAFETY FIX */
+/* MOBILE SAFETY */
 @media (max-width: 480px) {
     .nav-links {
         gap: 8px;
