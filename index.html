@@ -17,6 +17,7 @@ body {
     scroll-behavior: smooth;
 }
 
+/* NAV */
 .navbar {
     position: fixed;
     top: 0;
@@ -29,39 +30,29 @@ body {
     padding: 12px 20px;
     z-index: 999;
     backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    flex-wrap: nowrap;
     box-sizing: border-box;
-    overflow: hidden;
 }
 
 .navbar.scrolled {
-    padding: 8px 20px;
     background: rgba(11, 61, 145, 0.98);
 }
 
-.logo {
-    font-weight: bold;
-}
+.logo { font-weight: bold; }
 
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.navbar a {
+.nav-links a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    margin-left: 12px;
 }
 
-.navbar .cta {
+.cta {
     background: #2e8b57;
     padding: 8px 14px;
     border-radius: 6px;
 }
 
+/* HERO */
 .hero {
     margin-top: 55px;
     padding: 140px 20px 90px;
@@ -70,9 +61,7 @@ body {
     background: linear-gradient(120deg, #0b3d91, #2e8b57);
 }
 
-.hero h1 {
-    font-size: 3rem;
-}
+.hero h1 { font-size: 3rem; }
 
 .hero .cta-btn {
     display: inline-block;
@@ -85,35 +74,11 @@ body {
     text-decoration: none;
 }
 
+/* SECTIONS */
 .section {
     max-width: 1000px;
     margin: auto;
     padding: 70px 20px;
-}
-
-.story {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.story img {
-    width: 280px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.story-text {
-    flex: 1;
-}
-
-.highlight {
-    background: #2e8b57;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
 }
 
 .section-title {
@@ -128,6 +93,29 @@ body {
     color: #555;
 }
 
+/* STORY */
+.story {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.story img {
+    width: 280px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.highlight {
+    background: #2e8b57;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* PRIORITIES (RESTORED ORIGINAL STYLE) */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -141,16 +129,11 @@ body {
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-.card img,
-.card video {
-    width: 100%;
-    border-radius: 10px;
-}
-
 .card h3 {
     color: #0b3d91;
 }
 
+/* IMPACT */
 .impact {
     background: linear-gradient(90deg, #0b3d91, #2e8b57);
     color: white;
@@ -158,6 +141,7 @@ body {
     padding: 70px 20px;
 }
 
+/* CTA */
 .final-cta {
     text-align: center;
     padding: 70px 20px;
@@ -172,22 +156,12 @@ body {
     text-decoration: none;
 }
 
+/* FOOTER */
 footer {
     background: #222;
     color: white;
     text-align: center;
     padding: 20px;
-}
-
-@media (max-width:768px){
-    .story {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero h1 {
-        font-size: 2.2rem;
-    }
 }
 </style>
 </head>
@@ -196,7 +170,6 @@ footer {
 
 <div class="navbar">
     <div class="logo">Tonia Miller</div>
-
     <div class="nav-links">
         <a href="#story">About</a>
         <a href="#priorities">Priorities</a>
@@ -206,6 +179,7 @@ footer {
     </div>
 </div>
 
+<!-- HERO (RESTORED TEXT) -->
 <section class="hero">
     <h1>Vote Tonia Miller</h1>
     <p>District 6 – Bessemer City Council</p>
@@ -213,81 +187,77 @@ footer {
     <a class="cta-btn" href="#contact">Get Involved</a>
 </section>
 
+<!-- STORY (RESTORED CONTENT) -->
 <section class="section" id="story">
     <div class="story">
-        <img src="assets/tonia.jpg" alt="Tonia Miller">
+        <img src="assets/tonia.jpg">
 
-        <div class="story-text">
+        <div>
             <h2>Rooted in the Community</h2>
-
             <p>
                 I live here. I serve here. I believe in District 6.
-                My mission is simple: stronger neighborhoods,
-                accountable leadership, and real opportunity.
+                My mission is simple: stronger neighborhoods, accountable leadership,
+                and real opportunity for every resident.
             </p>
 
             <div class="highlight">
-                Progress begins with leadership that listens,
-                shows up, and delivers.
+                Progress begins with leadership that listens, shows up, and delivers.
             </div>
         </div>
     </div>
 </section>
 
+<!-- PRIORITIES (ORIGINAL ICONS RESTORED) -->
 <section class="section" id="priorities">
     <h2 class="section-title">Priorities for District 6</h2>
-
-    <p class="subtitle">
-        A focused plan built on real results, not promises.
-    </p>
+    <p class="subtitle">A focused plan built on real results, not promises.</p>
 
     <div class="grid">
 
         <div class="card">
-            <h3>Transparent Leadership</h3>
-            <p>Clear communication and accountability.</p>
+            <h3>🏛️ Transparent Leadership</h3>
+            <p>Clear communication and accountability in every decision.</p>
         </div>
 
         <div class="card">
-            <h3>Reliable Services</h3>
+            <h3>🚧 Reliable Services</h3>
             <p>Consistent city services residents can depend on.</p>
         </div>
 
         <div class="card">
-            <h3>Economic Growth</h3>
-            <p>Jobs, investment, and opportunity.</p>
+            <h3>💼 Economic Growth</h3>
+            <p>Jobs, investment, and opportunity for the community.</p>
         </div>
 
         <div class="card">
-            <h3>Senior Support</h3>
-            <p>Protecting and prioritizing seniors.</p>
+            <h3>👵🏾 Senior Support</h3>
+            <p>Protecting and prioritizing seniors in our community.</p>
         </div>
 
     </div>
 </section>
 
+<!-- EVENTS -->
 <section class="section" id="events">
     <h2 class="section-title">Upcoming Events</h2>
-    <p class="subtitle">Join us across District 6</p>
-
     <div id="events-container" class="grid"></div>
 </section>
 
+<!-- MEDIA -->
 <section class="section" id="media">
     <h2 class="section-title">Campaign Media</h2>
-    <p class="subtitle">Photos & Videos from the campaign trail</p>
-
     <div id="media-container" class="grid"></div>
 </section>
 
+<!-- IMPACT -->
 <section class="impact">
     <h2>Vote August 25th, 2026</h2>
     <p>Your voice shapes the future of District 6.</p>
 </section>
 
+<!-- CTA -->
 <section class="final-cta" id="contact">
     <h2>Get Involved Today</h2>
-    <p>Join the movement for real progress.</p>
     <a href="mailto:info@example.com">Contact Campaign</a>
 </section>
 
@@ -296,76 +266,77 @@ footer {
 </footer>
 
 <script>
-const supabaseUrl = "https://nllwrkampwtvysxwvech.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sbHdya2FtcHd0dnlzeHd2ZWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzEyMTgsImV4cCI6MjA5NDYwNzIxOH0.cIB9o5M8cjdodGOU_8iy1jC2PJj-UfXb0Dys2Htyr7Q";
-
 const supabase = window.supabase.createClient(
-    supabaseUrl,
-    supabaseKey
+    "https://nllwrkampwtvysxwvech.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sbHdya2FtcHd0dnlzeHd2ZWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzEyMTgsImV4cCI6MjA5NDYwNzIxOH0.cIB9o5M8cjdodGOU_8iy1jC2PJj-UfXb0Dys2Htyr7Q"
 );
 
-// EVENTS
+/* EVENTS (FIXED + SAFE) */
 async function loadEvents() {
+    const { data, error } = await supabase.from("events").select("*");
 
-    const { data } = await supabase
-        .from("events")
-        .select("*")
-        .order("id", { ascending: false });
+    console.log("EVENTS:", data, error);
 
-    document.getElementById("events-container").innerHTML =
-        data.map(e => `
-            <div class="card">
-                <h3>${e.title}</h3>
-                <p><strong>${e.day} ${e.month}</strong></p>
-                <p>${e.time}</p>
-                <p>${e.location}</p>
-            </div>
-        `).join("");
+    const container = document.getElementById("events-container");
+
+    if (error || !data) {
+        container.innerHTML = "<p>Error loading events</p>";
+        return;
+    }
+
+    if (data.length === 0) {
+        container.innerHTML = "<p>No events yet</p>";
+        return;
+    }
+
+    container.innerHTML = data.map(e => `
+        <div class="card">
+            <h3>${e.title || ""}</h3>
+            <p>${e.day || ""} ${e.month || ""}</p>
+            <p>${e.time || ""}</p>
+            <p>${e.location || ""}</p>
+        </div>
+    `).join("");
 }
 
-// MEDIA
+/* MEDIA (FIXED SAFE) */
 async function loadMedia() {
+    const { data, error } = await supabase.from("media").select("*");
 
-    const { data } = await supabase
-        .from("media")
-        .select("*")
-        .order("id", { ascending: false });
+    console.log("MEDIA:", data, error);
 
-    document.getElementById("media-container").innerHTML =
-        data.map(m => {
+    const container = document.getElementById("media-container");
 
-            if(m.type === "video") {
+    if (error || !data) {
+        container.innerHTML = "<p>Error loading media</p>";
+        return;
+    }
 
-                return `
-                    <div class="card">
-                        <video controls>
-                            <source src="${m.url}" type="video/mp4">
-                        </video>
-                        <p>${m.caption}</p>
-                    </div>
-                `;
-            }
+    container.innerHTML = data.map(m => {
+        const url = m.url || m.src || "";
 
+        if ((m.type || "").toLowerCase() === "video") {
             return `
                 <div class="card">
-                    <img src="${m.url}">
-                    <p>${m.caption}</p>
+                    <video controls src="${url}"></video>
+                    <p>${m.caption || ""}</p>
                 </div>
             `;
-        }).join("");
+        }
+
+        return `
+            <div class="card">
+                <img src="${url}">
+                <p>${m.caption || ""}</p>
+            </div>
+        `;
+    }).join("");
 }
 
-loadEvents();
-loadMedia();
-
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('.navbar');
-
-    if(window.scrollY > 20){
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
+/* INIT */
+document.addEventListener("DOMContentLoaded", () => {
+    loadEvents();
+    loadMedia();
 });
 </script>
 
