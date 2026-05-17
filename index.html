@@ -298,7 +298,7 @@ async function loadMedia() {
             return `
                 <div class="card">
                     <video controls width="100%">
-                        <source src="${m.url}" type="video/mp4">
+                        <source src="${m.src}" type="video/mp4">
                     </video>
                     <p>${m.caption || ""}</p>
                 </div>
@@ -307,7 +307,7 @@ async function loadMedia() {
 
         return `
             <div class="card">
-                <img src="${m.url}" width="100%">
+                <img src="${m.src}" width="100%">
                 <p>${m.caption || ""}</p>
             </div>
         `;
