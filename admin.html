@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Campaign Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body {
+    font-family: Arial;
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+button {
+    background: #0b3d91;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Campaign CMS Admin</h1>
+
+<div id="loginBox" class="card">
+
+    <h2>Admin Login</h2>
+
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+</div>
+
+<div id="dashboard" class="hidden">
+
+    <div class="card">
+
+        <h2>Upload Campaign Media</h2>
+
+        <select id="mediaType">
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+        </select>
+
+        <input type="file" id="fileUpload">
+
+        <input id="caption" placeholder="Caption">
+
+        <button onclick="uploadMedia()">
+            Upload Media
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Add Event</h2>
+
+        <input id="title" placeholder="Event Title">
+        <input id="day" placeholder="Day">
+        <input id="month" placeholder="Month">
+        <input id="time" placeholder="Time">
+        <input id="location" placeholder="Location">
+
+        <button onclick="addEvent()">
+            Add Event
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+const supabaseUrl = "https://nllwrkampwtvysxwvech.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sbHdya2FtcHd0dnlzeHd2ZWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzEyMTgsImV4cCI6MjA5NDYwNzIxOH0.cIB9o5M8cjdodGOU_8iy1jC2PJj-UfXb0Dys2Htyr7Q";
+
+const supabase = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+// LOGIN
+async function login(){
+
+    const { error } = await supabase.auth.signInWithPassword({
+        email: email.value,
+        password: password.value
+    });
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    loginBox.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+}
+
+// AUTO LOGIN CHECK
+supabase.auth.getSession().then(({ data }) => {
+
+    if(data.session){
+        loginBox.classList.add("hidden");
+        dashboard.classList.remove("hidden");
+    }
+});
+
+// UPLOAD MEDIA
+async function uploadMedia(){
+
+    const file = fileUpload.files[0];
+
+    if(!file){
+        alert("Select a file");
+        return;
+    }
+
+    const fileName = Date.now() + "_" + file.name;
+
+    const { error: uploadError } = await supabase
+        .storage
+        .from("campaign-media")
+        .upload(fileName, file);
+
+    if(uploadError){
+        alert(uploadError.message);
+        return;
+    }
+
+    const { data: publicUrlData } = supabase
+        .storage
+        .from("campaign-media")
+        .getPublicUrl(fileName);
+
+    const publicUrl = publicUrlData.publicUrl;
+
+    const { error: insertError } = await supabase
+        .from("media")
+        .insert([{
+            type: mediaType.value,
+            url: publicUrl,
+            caption: caption.value
+        }]);
+
+    if(insertError){
+        alert(insertError.message);
+        return;
+    }
+
+    alert("Media uploaded successfully");
+
+    caption.value = "";
+    fileUpload.value = "";
+}
+
+// ADD EVENT
+async function addEvent(){
+
+    const { error } = await supabase
+        .from("events")
+        .insert([{
+            title: title.value,
+            day: day.value,
+            month: month.value,
+            time: time.value,
+            location: location.value
+        }]);
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    alert("Event added");
+
+    title.value = "";
+    day.value = "";
+    month.value = "";
+    time.value = "";
+    location.value = "";
+}
+</script>
+
+</body>
+</html>
