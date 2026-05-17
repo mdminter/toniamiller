@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vote Tonia Miller | District 6</title>
 
+<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -14,10 +15,9 @@ body {
     background: #f6f8fb;
     color: #222;
     line-height: 1.6;
-    scroll-behavior: smooth;
 }
 
-/* NAV */
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
@@ -30,7 +30,6 @@ body {
     padding: 12px 20px;
     z-index: 999;
     backdrop-filter: blur(10px);
-    box-sizing: border-box;
 }
 
 .navbar.scrolled {
@@ -39,14 +38,18 @@ body {
 
 .logo { font-weight: bold; }
 
-.nav-links a {
+.nav-links {
+    display: flex;
+    gap: 12px;
+}
+
+.navbar a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    margin-left: 12px;
 }
 
-.cta {
+.navbar .cta {
     background: #2e8b57;
     padding: 8px 14px;
     border-radius: 6px;
@@ -55,24 +58,13 @@ body {
 /* HERO */
 .hero {
     margin-top: 55px;
-    padding: 140px 20px 90px;
+    padding: 120px 20px;
     text-align: center;
     color: white;
     background: linear-gradient(120deg, #0b3d91, #2e8b57);
 }
 
 .hero h1 { font-size: 3rem; }
-
-.hero .cta-btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 12px 24px;
-    background: white;
-    color: #0b3d91;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-}
 
 /* SECTIONS */
 .section {
@@ -88,40 +80,17 @@ body {
 
 .subtitle {
     text-align: center;
-    max-width: 700px;
-    margin: 10px auto 40px;
     color: #555;
 }
 
-/* STORY */
-.story {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.story img {
-    width: 280px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.highlight {
-    background: #2e8b57;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-}
-
-/* PRIORITIES (RESTORED ORIGINAL STYLE) */
+/* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
 }
 
+/* CARD */
 .card {
     background: white;
     padding: 22px;
@@ -129,8 +98,12 @@ body {
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-.card h3 {
-    color: #0b3d91;
+.card h3 { color: #0b3d91; }
+
+/* PRIORITY ICONS RESTORED */
+.icon {
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
 /* IMPACT */
@@ -148,20 +121,23 @@ body {
 }
 
 .final-cta a {
-    display: inline-block;
-    padding: 14px 26px;
     background: #2e8b57;
     color: white;
+    padding: 14px 26px;
     border-radius: 8px;
     text-decoration: none;
 }
 
-/* FOOTER */
 footer {
     background: #222;
     color: white;
     text-align: center;
     padding: 20px;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+    .hero h1 { font-size: 2.2rem; }
 }
 </style>
 </head>
@@ -179,59 +155,53 @@ footer {
     </div>
 </div>
 
-<!-- HERO (RESTORED TEXT) -->
 <section class="hero">
     <h1>Vote Tonia Miller</h1>
     <p>District 6 – Bessemer City Council</p>
     <p><em>Real Leadership. Real Community Progress.</em></p>
-    <a class="cta-btn" href="#contact">Get Involved</a>
 </section>
 
-<!-- STORY (RESTORED CONTENT) -->
 <section class="section" id="story">
-    <div class="story">
-        <img src="assets/tonia.jpg">
-
-        <div>
-            <h2>Rooted in the Community</h2>
-            <p>
-                I live here. I serve here. I believe in District 6.
-                My mission is simple: stronger neighborhoods, accountable leadership,
-                and real opportunity for every resident.
-            </p>
-
-            <div class="highlight">
-                Progress begins with leadership that listens, shows up, and delivers.
-            </div>
-        </div>
-    </div>
+    <h2 class="section-title">Rooted in the Community</h2>
+    <p style="text-align:center;">
+        I live here. I serve here. Strong neighborhoods. Real results.
+    </p>
 </section>
 
-<!-- PRIORITIES (ORIGINAL ICONS RESTORED) -->
+<!-- PRIORITIES (ICONS RESTORED) -->
 <section class="section" id="priorities">
     <h2 class="section-title">Priorities for District 6</h2>
-    <p class="subtitle">A focused plan built on real results, not promises.</p>
 
     <div class="grid">
 
         <div class="card">
-            <h3>🏛️ Transparent Leadership</h3>
-            <p>Clear communication and accountability in every decision.</p>
+            <div class="icon">🏛️</div>
+            <h3>Transparent Leadership</h3>
+            <p>Clear communication and accountability.</p>
         </div>
 
         <div class="card">
-            <h3>🚧 Reliable Services</h3>
-            <p>Consistent city services residents can depend on.</p>
+            <div class="icon">🚧</div>
+            <h3>Reliable Services</h3>
+            <p>City services residents can depend on.</p>
         </div>
 
         <div class="card">
-            <h3>💼 Economic Growth</h3>
-            <p>Jobs, investment, and opportunity for the community.</p>
+            <div class="icon">💼</div>
+            <h3>Economic Growth</h3>
+            <p>Jobs and investment opportunities.</p>
         </div>
 
         <div class="card">
-            <h3>👵🏾 Senior Support</h3>
-            <p>Protecting and prioritizing seniors in our community.</p>
+            <div class="icon">👵🏾</div>
+            <h3>Senior Support</h3>
+            <p>Protecting seniors in our community.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏘️</div>
+            <h3>Community Strength</h3>
+            <p>Safer neighborhoods through action.</p>
         </div>
 
     </div>
@@ -249,76 +219,87 @@ footer {
     <div id="media-container" class="grid"></div>
 </section>
 
-<!-- IMPACT -->
 <section class="impact">
     <h2>Vote August 25th, 2026</h2>
-    <p>Your voice shapes the future of District 6.</p>
+    <p>Your voice shapes the future.</p>
 </section>
 
-<!-- CTA -->
 <section class="final-cta" id="contact">
-    <h2>Get Involved Today</h2>
+    <h2>Get Involved</h2>
     <a href="mailto:info@example.com">Contact Campaign</a>
 </section>
 
 <footer>
-    Paid for by the Committee to Elect Tonia Miller
+Paid for by Committee to Elect Tonia Miller
 </footer>
 
 <script>
-const supabase = window.supabase.createClient(
-    "https://nllwrkampwtvysxwvech.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sbHdya2FtcHd0dnlzeHd2ZWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzEyMTgsImV4cCI6MjA5NDYwNzIxOH0.cIB9o5M8cjdodGOU_8iy1jC2PJj-UfXb0Dys2Htyr7Q"
+/* ================= SUPABASE SAFE INIT ================= */
+const SUPABASE_URL = "https://nllwrkampwtvysxwvech.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sbHdya2FtcHd0dnlzeHd2ZWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzEyMTgsImV4cCI6MjA5NDYwNzIxOH0.cIB9o5M8cjdodGOU_8iy1jC2PJj-UfXb0Dys2Htyr7Q";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
 );
 
-/* EVENTS (FIXED + SAFE) */
+/* ================= EVENTS ================= */
 async function loadEvents() {
-    const { data, error } = await supabase.from("events").select("*");
-
-    console.log("EVENTS:", data, error);
+    const { data, error } = await supabaseClient
+        .from("events")
+        .select("*")
+        .order("id", { ascending: false });
 
     const container = document.getElementById("events-container");
 
-    if (error || !data) {
-        container.innerHTML = "<p>Error loading events</p>";
+    if (error) {
+        console.error("Events error:", error);
         return;
     }
 
-    if (data.length === 0) {
-        container.innerHTML = "<p>No events yet</p>";
+    if (!data || data.length === 0) {
+        container.innerHTML = "<p>No events yet.</p>";
         return;
     }
 
     container.innerHTML = data.map(e => `
         <div class="card">
+            <div class="icon">📅</div>
             <h3>${e.title || ""}</h3>
-            <p>${e.day || ""} ${e.month || ""}</p>
+            <p><b>${e.day || ""} ${e.month || ""}</b></p>
             <p>${e.time || ""}</p>
             <p>${e.location || ""}</p>
         </div>
     `).join("");
 }
 
-/* MEDIA (FIXED SAFE) */
+/* ================= MEDIA ================= */
 async function loadMedia() {
-    const { data, error } = await supabase.from("media").select("*");
-
-    console.log("MEDIA:", data, error);
+    const { data, error } = await supabaseClient
+        .from("media")
+        .select("*")
+        .order("id", { ascending: false });
 
     const container = document.getElementById("media-container");
 
-    if (error || !data) {
-        container.innerHTML = "<p>Error loading media</p>";
+    if (error) {
+        console.error("Media error:", error);
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        container.innerHTML = "<p>No media yet.</p>";
         return;
     }
 
     container.innerHTML = data.map(m => {
-        const url = m.url || m.src || "";
 
-        if ((m.type || "").toLowerCase() === "video") {
+        if (m.type === "video") {
             return `
                 <div class="card">
-                    <video controls src="${url}"></video>
+                    <video controls width="100%">
+                        <source src="${m.url}" type="video/mp4">
+                    </video>
                     <p>${m.caption || ""}</p>
                 </div>
             `;
@@ -326,17 +307,21 @@ async function loadMedia() {
 
         return `
             <div class="card">
-                <img src="${url}">
+                <img src="${m.url}" width="100%">
                 <p>${m.caption || ""}</p>
             </div>
         `;
     }).join("");
 }
 
-/* INIT */
-document.addEventListener("DOMContentLoaded", () => {
-    loadEvents();
-    loadMedia();
+/* ================= BOOT ================= */
+loadEvents();
+loadMedia();
+
+/* navbar scroll */
+window.addEventListener("scroll", () => {
+    document.querySelector(".navbar")
+        .classList.toggle("scrolled", window.scrollY > 20);
 });
 </script>
 
