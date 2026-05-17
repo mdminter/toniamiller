@@ -165,7 +165,7 @@ async function uploadMedia() {
 
     await client.from("media").insert([{
         type,
-        url: data.publicUrl,
+        src: data.publicUrl,
         caption
     }]);
 
