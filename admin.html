@@ -6,7 +6,6 @@
 
 <title>Campaign Admin</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 body {
@@ -103,114 +102,98 @@ button:hover {
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 const supabaseUrl = "https://nllwrkampwtvysxwvech.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sbHdya2FtcHd0dnlzeHd2ZWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzEyMTgsImV4cCI6MjA5NDYwNzIxOH0.cIB9o5M8cjdodGOU_8iy1jC2PJj-UfXb0Dys2Htyr7Q";
 
-const supabase = window.supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
+const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-// LOGIN
-async function login(){
+// ---------------- LOGIN ----------------
+async function login() {
+    const emailVal = document.getElementById("email").value;
+    const passwordVal = document.getElementById("password").value;
 
-    const { error } = await supabase.auth.signInWithPassword({
-        email: email.value,
-        password: password.value
+    const { error } = await client.auth.signInWithPassword({
+        email: emailVal,
+        password: passwordVal
     });
 
-    if(error){
+    if (error) {
         alert(error.message);
         return;
     }
 
-    loginBox.classList.add("hidden");
-    dashboard.classList.remove("hidden");
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
 }
 
-// AUTO LOGIN CHECK
-supabase.auth.getSession().then(({ data }) => {
-
-    if(data.session){
-        loginBox.classList.add("hidden");
-        dashboard.classList.remove("hidden");
+// ---------------- AUTO SESSION CHECK ----------------
+client.auth.getSession().then(({ data }) => {
+    if (data.session) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
     }
 });
 
-// UPLOAD MEDIA
-async function uploadMedia(){
+// ---------------- UPLOAD MEDIA ----------------
+async function uploadMedia() {
+    const file = document.getElementById("fileUpload").files[0];
+    const caption = document.getElementById("caption").value;
+    const type = document.getElementById("mediaType").value;
 
-    const file = fileUpload.files[0];
-
-    if(!file){
+    if (!file) {
         alert("Select a file");
         return;
     }
 
     const fileName = Date.now() + "_" + file.name;
 
-    const { error: uploadError } = await supabase
-        .storage
+    const { error: uploadError } = await client.storage
         .from("campaign-media")
         .upload(fileName, file);
 
-    if(uploadError){
+    if (uploadError) {
         alert(uploadError.message);
         return;
     }
 
-    const { data: publicUrlData } = supabase
-        .storage
+    const { data } = client.storage
         .from("campaign-media")
         .getPublicUrl(fileName);
 
-    const publicUrl = publicUrlData.publicUrl;
+    await client.from("media").insert([{
+        type,
+        url: data.publicUrl,
+        caption
+    }]);
 
-    const { error: insertError } = await supabase
-        .from("media")
-        .insert([{
-            type: mediaType.value,
-            url: publicUrl,
-            caption: caption.value
-        }]);
-
-    if(insertError){
-        alert(insertError.message);
-        return;
-    }
-
-    alert("Media uploaded successfully");
-
-    caption.value = "";
-    fileUpload.value = "";
+    alert("Media uploaded");
 }
 
-// ADD EVENT
-async function addEvent(){
+// ---------------- ADD EVENT ----------------
+async function addEvent() {
+    const title = document.getElementById("title").value;
+    const day = document.getElementById("day").value;
+    const month = document.getElementById("month").value;
+    const time = document.getElementById("time").value;
+    const location = document.getElementById("location").value;
 
-    const { error } = await supabase
-        .from("events")
-        .insert([{
-            title: title.value,
-            day: day.value,
-            month: month.value,
-            time: time.value,
-            location: location.value
-        }]);
+    const { error } = await client.from("events").insert([{
+        title,
+        day,
+        month,
+        time,
+        location
+    }]);
 
-    if(error){
+    if (error) {
         alert(error.message);
         return;
     }
 
     alert("Event added");
-
-    title.value = "";
-    day.value = "";
-    month.value = "";
-    time.value = "";
-    location.value = "";
 }
 </script>
 
